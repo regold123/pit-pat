@@ -1,25 +1,57 @@
-import logo from './logo.svg';
+import React from 'react';
 import './App.css';
+import LogIn from './components/LogIn';
+import ChatRoom from './components/ChatRoom';
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+class App extends React.Component {
+  constructor(props) {
+    super(props);
+      this.state = {
+        user: "",
+        isSubmitted: false,
+      };
+  }
+
+  handleChange = (e) => {
+      this.setState({
+        [e.target.name]: e.target.value,
+      });
+  }
+
+  handleSubmit = (event) => {
+    event.preventDefault();
+    this.setState({
+      isSubmitted: true,
+      user: this.state.username,
+    });
+  };
+
+  render() {
+    const username = this.state.user;
+    const handleChange = this.handleChange;
+    const handleSubmit = this.handleSubmit;
+
+    return (
+      <div className="App">
+        <header>
+
+        </header>
+
+        <section>
+          {username ?
+            <ChatRoom
+              username={username}
+            /> :
+            <LogIn
+              username={username}
+              handleChange={handleChange}
+              handleSubmit={handleSubmit}
+            />
+          }
+        </section>
+      </div>
+    );
+  }
 }
 
 export default App;
