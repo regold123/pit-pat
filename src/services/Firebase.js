@@ -13,9 +13,7 @@ firebase.initializeApp({
   appId: "1:576792965190:web:78837f5de8f3200e5c1a47"
 })
 
-/*
 const auth = firebase.auth();
 const firestore = firebase.firestore();
 
-const [user] = useAuthState();
-*/
+export default firestore;

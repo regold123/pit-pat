@@ -8,7 +8,6 @@ class App extends React.Component {
     super(props);
       this.state = {
         user: "",
-        isSubmitted: false,
       };
   }
 
@@ -21,13 +20,12 @@ class App extends React.Component {
   handleSubmit = (event) => {
     event.preventDefault();
     this.setState({
-      isSubmitted: true,
       user: this.state.username,
     });
   };
 
   render() {
-    const username = this.state.user;
+    const user = this.state.user;
     const handleChange = this.handleChange;
     const handleSubmit = this.handleSubmit;
 
@@ -38,12 +36,12 @@ class App extends React.Component {
         </header>
 
         <section>
-          {username ?
+          {user ?
             <ChatRoom
-              username={username}
+              user={user}
             /> :
             <LogIn
-              username={username}
+              user={user}
               handleChange={handleChange}
               handleSubmit={handleSubmit}
             />
