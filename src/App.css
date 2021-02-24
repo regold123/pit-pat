@@ -44,6 +44,7 @@ body {
   color: white;
 }
 
+/*
 .logInButton:hover {
   margin-top: 50px;
   border-radius: 50px;
@@ -53,7 +54,7 @@ body {
   font-weight: bold;
   color: white;
 }
-
+*/
 
 .chatBox {
   display: block;

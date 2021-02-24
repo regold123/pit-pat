@@ -1,13 +1,23 @@
 import React, { useState } from 'react';
 import '../App.css'
+import firebase from 'firebase/app';
+import firestore from '../services/Firebase.js';
+import { useCollectionData } from 'react-firebase-hooks/firestore';
 
-const LogIn = ({user, handleChange, handleSubmit}) => {
-  const [newUsername, setNewUsername] = useState("");
 
-  const inputNewUsername = (event) => {
-    setNewUsername(event.target.value);
+const LogIn = ({user, handleSubmit}) => {
+  const [username, setNewUsername] = useState("");
+  const messagesRef = firestore.collection('messages');
+  const [messages] = useCollectionData(messagesRef);
+
+  const inputNewUsername = async (e) => {
+    setNewUsername(e.target.value);
   }
 
+  const checkUsername = (username) => {
+    const allUsers = messages.map(msg => {return msg.user})
+    {allUsers.includes(username) ? alert("This username already exists, please try a different name.") : handleSubmit(username);}
+  }
 
   return (
     <div className="container">
@@ -16,7 +26,8 @@ const LogIn = ({user, handleChange, handleSubmit}) => {
           <h3>Welcome to PitPatApp</h3>
         </div>
         <div className="logInForm">
-          <form onSubmit={handleSubmit}>
+          <form onSubmit={() => {
+            checkUsername(username)}}>
             <div className="form-group userNameField">
               <div>
                 <label>Please enter your username for this chat:</label><br></br>
@@ -26,7 +37,7 @@ const LogIn = ({user, handleChange, handleSubmit}) => {
                   className="form-control"
                   name="username"
                   placeholder="Username"
-                  onChange={handleChange}
+                  onChange={inputNewUsername}
                 />
               </div>
             </div>

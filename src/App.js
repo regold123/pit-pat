@@ -11,22 +11,14 @@ class App extends React.Component {
       };
   }
 
-  handleChange = (e) => {
+  handleSubmit = (username) => {
       this.setState({
-        [e.target.name]: e.target.value,
+        user: username,
       });
-  }
-
-  handleSubmit = (event) => {
-    event.preventDefault();
-    this.setState({
-      user: this.state.username,
-    });
   };
 
   render() {
     const user = this.state.user;
-    const handleChange = this.handleChange;
     const handleSubmit = this.handleSubmit;
 
     return (
@@ -42,7 +34,6 @@ class App extends React.Component {
             /> :
             <LogIn
               user={user}
-              handleChange={handleChange}
               handleSubmit={handleSubmit}
             />
           }
